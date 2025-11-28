@@ -1,12 +1,6 @@
-// MovieCardコンポーネントをインポートします
-// '../components/MovieCard'は、現在のファイル（pages/Home.jsx）から見て、
-// 一つ上の階層（src）のcomponentsフォルダ内のMovieCard.jsxファイルを指します
 import MovieCard from '../components/MovieCard'
-
-// ReactライブラリからuseStateフックをインポートします
-// useStateは、コンポーネント内で状態（state）を管理するためのReactの機能です
-// フック（Hook）とは、関数コンポーネントでReactの機能を使うための特別な関数です
 import { useState } from 'react'
+import { getPopularMovies, searchMovies } from '../services/api'
 
 /**
  * Homeコンポーネント
@@ -43,15 +37,8 @@ function Home() {
    * @param {Event} e - フォーム送信イベントオブジェクト
    */
   const handleSearch = (e) => {
-    // preventDefault()で、フォーム送信時のデフォルトの動作（ページリロード）を防ぎます
-    // これにより、ページがリロードされずにReactアプリケーションが動作し続けます
     e.preventDefault()
-    
-    // 現在の検索クエリをアラートで表示します（デバッグ用）
-    // 実際のアプリケーションでは、ここでAPIを呼び出して検索結果を取得します
     alert(searchQuery)
-    
-    // 検索後、検索入力欄を空にするために、searchQueryのstateを空文字列にリセットします
     setSearchQuery('')
   }
 
@@ -60,42 +47,24 @@ function Home() {
   // className='home'で、CSSスタイルを適用するためのクラス名を指定しています
   return (
     <div className='home'>
-      {/* 
-        検索フォームです
-        onSubmit={handleSearch}で、フォームが送信されたときにhandleSearch関数を実行します
-        className='search-form'で、フォーム専用のCSSスタイルを適用します
-      */}
-      <form onSubmit={handleSearch} className='search-form'>
-        {/* 
-          検索入力欄です
-          type='text'で、テキスト入力欄であることを指定します
-          placeholder='映画を検索'で、入力欄が空のときに表示されるヒントテキストを設定します
-          className='search-input'で、入力欄専用のCSSスタイルを適用します
-          value={searchQuery}で、入力欄の値をsearchQueryのstateと同期させます（制御コンポーネント）
-          onChange={(e) => setSearchQuery(e.target.value)}で、入力値が変更されたときに
-          searchQueryのstateを更新します
-          e.target.valueは、入力欄の現在の値を取得します
-        */}
+      <form onSubmit={handleSearch} className='search-form mb-8 flex gap-4 max-w-2xl mx-auto'>
         <input 
           type='text' 
           placeholder='映画を検索' 
-          className='search-input' 
+          className='search-input flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent' 
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        {/* 
-          検索ボタンです
-          type='submit'で、このボタンをクリックするとフォームが送信されることを指定します
-          className='search-button'で、ボタン専用のCSSスタイルを適用します
-        */}
-        <button type='submit' className='search-button'>検索</button>
+        <button type='submit' className='search-button px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium'>
+          検索
+        </button>
       </form>
 
       {/* 
         映画リストを表示するグリッドコンテナです
         className='movies-grid'で、グリッドレイアウトのCSSスタイルを適用します
       */}
-      <div className='movies-grid'>
+      <div className='movies-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
         {/* 
           movies配列をmapメソッドでループ処理して、各映画をMovieCardコンポーネントで表示します
           

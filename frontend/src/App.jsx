@@ -1,6 +1,3 @@
-// App.cssファイルをインポートして、このコンポーネント専用のスタイルを適用します
-import './css/App.css'
-
 import { Routes, Route } from 'react-router-dom'
 
 // Homeページコンポーネントをインポートします
@@ -21,9 +18,9 @@ import NavBar from './components/NavBar'
 function App() {
 
   return (
-    <div>
+    <div className='min-h-screen bg-gray-100'>
       <NavBar />
-      <main className='main-content'>
+      <main className='main-content container mx-auto px-4 py-8'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/favorites' element={<Favorites />} />

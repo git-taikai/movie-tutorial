@@ -19,14 +19,22 @@ function Favorites() {
   // className="favorites-empty"で、空の状態専用のCSSスタイルを適用します
   // このクラス名は、お気に入りが0件の場合のスタイリングに使用されます
   return (
-    <div className="favorites-empty">
-      {/* 
-        h2タグで、見出しを表示します
-        このメッセージは、ユーザーにお気に入りの映画がまだ登録されていないことを伝えます
-        実際のアプリケーションでは、お気に入りリストが空の場合のみこのメッセージを表示し、
-        お気に入りがある場合は、MovieCardコンポーネントなどを使ってリストを表示します
-      */}
-      <h2>お気に入りの映画はありません</h2>
+    <div className="
+      favorites-empty
+      flex flex-col 
+      justify-center 
+      min-h-[60vh] 
+      text-center
+      bg-gray-300
+      rounded-lg
+      "
+    >
+      <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">
+        お気に入りの映画はありません
+      </h2>
+      <p className="text-gray-500">
+        映画をお気に入りに追加すると、ここに表示されます
+      </p>
     </div>
   )
 }
